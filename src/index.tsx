@@ -2,11 +2,46 @@ import React from 'react';
 
 const DEFAULT_PAGE_SIZE = 5;
 
+type PageButtonComponentType = React.FC<
+  React.HTMLAttributes<HTMLDivElement> & { active: boolean }
+>;
+
+const Container = ({ children }: { children: React.ReactNode }) => {
+  return <div>{children}</div>;
+};
+
+const PageButtonComponent: PageButtonComponentType = ({
+  children,
+  onClick,
+  active,
+  ...rest
+}) => {
+  return (
+    <div
+      onClick={onClick}
+      {...rest}
+      style={{
+        background: active ? '#123456' : '',
+        color: active ? 'white' : '',
+      }}
+    >
+      {children}
+    </div>
+  );
+};
+
+export const components = {
+  pageButtonComponent: PageButtonComponent,
+  container: Container,
+};
+
 type PaginateProps = {
   page?: number;
   totalPages: number;
   pageSize?: number;
   onChange?: (page: number) => void;
+  containerComponent?: React.FC<{ children: React.ReactNode }>;
+  pageButtonComponent?: PageButtonComponentType;
 };
 
 export const Paginate = ({
@@ -14,7 +49,12 @@ export const Paginate = ({
   totalPages,
   pageSize = DEFAULT_PAGE_SIZE,
   onChange,
+  containerComponent = components.container,
+  pageButtonComponent = components.pageButtonComponent,
 }: PaginateProps) => {
+  const Container = containerComponent;
+  const PageButtonComponent = pageButtonComponent;
+
   const calculatePageOffsets = (
     page: number,
     pageSize: number,
@@ -50,19 +90,16 @@ export const Paginate = ({
   );
 
   return (
-    <div>
+    <Container>
       {makePageNumberArray(startPage, endPage).map(pageNumber => (
-        <div
+        <PageButtonComponent
           key={pageNumber}
           onClick={() => onChange?.(pageNumber)}
-          style={{
-            background: page === pageNumber ? '#123456' : '',
-            color: page === pageNumber ? 'white' : '',
-          }}
+          active={page === pageNumber}
         >
           {pageNumber}
-        </div>
+        </PageButtonComponent>
       ))}
-    </div>
+    </Container>
   );
 };
