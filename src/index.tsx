@@ -7,7 +7,7 @@ type PageButtonComponentType = React.FC<
 >;
 
 const Container = ({ children }: { children: React.ReactNode }) => {
-  return <div>{children}</div>;
+  return <div style={{ display: 'flex', gap: 6 }}>{children}</div>;
 };
 
 const PageButtonComponent: PageButtonComponentType = ({
@@ -21,8 +21,10 @@ const PageButtonComponent: PageButtonComponentType = ({
       onClick={onClick}
       {...rest}
       style={{
+        padding: '4px 8px',
         background: active ? '#123456' : '',
         color: active ? 'white' : '',
+        cursor: 'pointer',
       }}
     >
       {children}
