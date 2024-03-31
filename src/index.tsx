@@ -15,36 +15,46 @@ export const Paginate = ({
   pageSize = DEFAULT_PAGE_SIZE,
   onChange,
 }: PaginateProps) => {
-  console.log(page, totalPages, pageSize, onChange);
+  const calculatePageOffsets = (
+    page: number,
+    pageSize: number,
+    totalPages: number
+  ) => {
+    let startOffset = page - Math.floor(pageSize / 2 - 0.1);
+    let endOffset = page + Math.floor(pageSize / 2);
 
-  const startOffset = page - Math.floor(pageSize / 2 - 0.1);
-  const endOffset = page + Math.floor(pageSize / 2);
+    let startPage = Math.max(1, startOffset);
+    if (totalPages < endOffset) {
+      const diff = endOffset - totalPages;
+      startPage -= diff;
+    }
 
-  let startPage: number;
-  startPage = Math.max(1, startOffset);
+    const endPage = Math.min(
+      totalPages,
+      endOffset + (startOffset <= 0 ? -startOffset + 1 : 0)
+    );
+    return { startPage, endPage };
+  };
 
-  if (totalPages < endOffset) {
-    const diff = endOffset - totalPages;
-    startPage = startPage - diff;
-  }
+  const makePageNumberArray = (startPage: number, endPage: number) => {
+    return Array.from(
+      { length: endPage - startPage + 1 },
+      (_, index) => startPage + index
+    );
+  };
 
-  let endPage: number;
-  endPage = Math.min(
-    totalPages,
-    endOffset + (startOffset <= 0 ? -startOffset + 1 : 0)
-  );
-
-  const pageNumberArray = Array.from(
-    { length: endPage - startPage + 1 },
-    (_, index) => startPage + index
+  const { startPage, endPage } = calculatePageOffsets(
+    page,
+    pageSize,
+    totalPages
   );
 
   return (
     <div>
-      {pageNumberArray.map(pageNumber => (
+      {makePageNumberArray(startPage, endPage).map(pageNumber => (
         <div
           key={pageNumber}
-          onClick={() => onChange && onChange(pageNumber)}
+          onClick={() => onChange?.(pageNumber)}
           style={{
             background: page === pageNumber ? '#123456' : '',
             color: page === pageNumber ? 'white' : '',
