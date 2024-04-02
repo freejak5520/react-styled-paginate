@@ -24,7 +24,7 @@ const PageButtonComponent: PageButtonComponentType = ({
     <div
       onClick={e => {
         if (disabled || active) return;
-        onClick?.(e);
+        onClick && onClick(e);
       }}
       {...rest}
       style={{
