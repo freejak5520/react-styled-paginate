@@ -3,7 +3,10 @@ import React from 'react';
 const DEFAULT_PAGE_SIZE = 5;
 
 type PageButtonComponentType = React.FC<
-  React.HTMLAttributes<HTMLDivElement> & { active: boolean }
+  React.HTMLAttributes<HTMLDivElement> & {
+    active?: boolean;
+    disabled?: boolean;
+  }
 >;
 
 const Container = ({ children }: { children: React.ReactNode }) => {
@@ -14,17 +17,21 @@ const PageButtonComponent: PageButtonComponentType = ({
   children,
   onClick,
   active,
+  disabled,
   ...rest
 }) => {
   return (
     <div
-      onClick={onClick}
+      onClick={e => {
+        if (disabled || active) return;
+        onClick?.(e);
+      }}
       {...rest}
       style={{
         padding: '4px 8px',
         background: active ? '#123456' : '',
         color: active ? 'white' : '',
-        cursor: 'pointer',
+        cursor: disabled ? 'not-allowed' : 'pointer',
       }}
     >
       {children}
@@ -93,6 +100,15 @@ export const Paginate = ({
 
   return (
     <Container>
+      <PageButtonComponent disabled={page === 1} onClick={() => onChange?.(1)}>
+        First
+      </PageButtonComponent>
+      <PageButtonComponent
+        disabled={page === 1}
+        onClick={() => onChange?.(page - 1)}
+      >
+        Previous
+      </PageButtonComponent>
       {makePageNumberArray(startPage, endPage).map(pageNumber => (
         <PageButtonComponent
           key={pageNumber}
@@ -102,6 +118,18 @@ export const Paginate = ({
           {pageNumber}
         </PageButtonComponent>
       ))}
+      <PageButtonComponent
+        disabled={page === totalPages}
+        onClick={() => onChange?.(page + 1)}
+      >
+        Next
+      </PageButtonComponent>
+      <PageButtonComponent
+        disabled={page === totalPages}
+        onClick={() => onChange?.(totalPages)}
+      >
+        Last
+      </PageButtonComponent>
     </Container>
   );
 };
