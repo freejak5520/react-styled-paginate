@@ -35,7 +35,7 @@
     "trailingComma": "es5"
   },
   "name": "styled-paginate",
-  "author": "jake",
+  "author": "jakelee",
   "module": "dist/styled-paginate.esm.js",
   "size-limit": [
     {
