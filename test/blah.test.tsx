@@ -4,7 +4,7 @@ import { Paginate } from '../src';
 
 describe('it', () => {
   it('renders without crashing', () => {
-    const component = renderer.create(<Paginate totalPages={100} />);
+    const component = renderer.create(<Paginate total={100} />);
 
     expect(component.toJSON()).toMatchSnapshot();
   });
@@ -12,8 +12,8 @@ describe('it', () => {
   it('renders with custom component', () => {
     const component = renderer.create(
       <Paginate
-        page={4}
-        totalPages={10}
+        currentPage={4}
+        total={10}
         containerComponent={({ children }) => (
           <div style={{ display: 'flex', justifyContent: 'start', gap: '4px' }}>
             {children}
