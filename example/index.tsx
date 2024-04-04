@@ -9,33 +9,41 @@ const App = () => {
   return (
     <div>
       <h2>Default</h2>
-      <Paginate page={page} totalPages={10} onChange={setPage} />
+      <Paginate currentPage={page} total={10} onClickPage={setPage} />
 
       <h2>Custom Components</h2>
       <Paginate
-        page={page}
-        totalPages={10}
-        onChange={setPage}
-        containerComponent={({ children }) => (
-          <div style={{ display: 'flex', justifyContent: 'start', gap: '4px' }}>
-            {children}
-          </div>
-        )}
-        pageButtonComponent={({ children, active, ...props }) => (
-          <div
-            {...props}
-            style={{
-              backgroundColor: active ? 'blue' : 'white',
-              color: active ? 'white' : 'black',
-              cursor: 'pointer',
-              padding: '10px',
-              border: '1px solid black',
-              borderRadius: '5px',
-            }}
-          >
-            {children}
-          </div>
-        )}
+        currentPage={page}
+        total={10}
+        onClickPage={setPage}
+        options={{
+          containerComponent: ({ children }) => {
+            return (
+              <div
+                style={{ display: 'flex', justifyContent: 'start', gap: '4px' }}
+              >
+                {children}
+              </div>
+            );
+          },
+          pageButtonComponent: ({ children, active, ...props }) => {
+            return (
+              <div
+                {...props}
+                style={{
+                  backgroundColor: active ? 'blue' : 'white',
+                  color: active ? 'white' : 'black',
+                  cursor: 'pointer',
+                  padding: '10px',
+                  border: '1px solid black',
+                  borderRadius: '5px',
+                }}
+              >
+                {children}
+              </div>
+            );
+          },
+        }}
       />
     </div>
   );

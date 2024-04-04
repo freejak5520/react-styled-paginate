@@ -5,7 +5,43 @@ import {
   DEFAULT_CURRENT_PAGE,
   DEFAULT_PAGE_SIZE as DEFAULT_PER_PAGE,
 } from './constants';
-import { calculatePageOffsets } from './utils';
+
+type PaginateProps = {
+  currentPage?: number;
+  total: number;
+  perPage?: number;
+  onClickPage?: (page: number) => void;
+  options?: Options;
+};
+
+type ContainerComponentType = React.FC<
+  React.HTMLAttributes<HTMLDivElement> & { children: React.ReactNode }
+>;
+
+type PageButtonComponentType = React.FC<
+  React.HTMLAttributes<HTMLDivElement> & {
+    active?: boolean;
+    disabled?: boolean;
+  }
+>;
+
+type Options = {
+  containerComponent?: ContainerComponentType;
+  pageButtonComponent?: PageButtonComponentType;
+  previousText?: string;
+  nextText?: string;
+  firstText?: string;
+  lastText?: string;
+};
+
+type DefaultOptions = {
+  containerComponent: ContainerComponentType;
+  pageButtonComponent: PageButtonComponentType;
+  previousText: string;
+  nextText: string;
+  firstText: string;
+  lastText: string;
+};
 
 export const defaultOptions: DefaultOptions = {
   containerComponent: Container,
@@ -34,6 +70,27 @@ export const Paginate = ({
 
   const Container = containerComponent;
   const PageButtonComponent = pageButtonComponent;
+
+  const calculatePageOffsets = (
+    page: number,
+    pageSize: number,
+    totalPages: number
+  ) => {
+    let startOffset = page - Math.floor(pageSize / 2 - 0.1);
+    let endOffset = page + Math.floor(pageSize / 2);
+
+    let startPage = Math.max(1, startOffset);
+    if (totalPages < endOffset) {
+      const diff = endOffset - totalPages;
+      startPage -= diff;
+    }
+
+    const endPage = Math.min(
+      totalPages,
+      endOffset + (startOffset <= 0 ? -startOffset + 1 : 0)
+    );
+    return { startPage, endPage };
+  };
 
   const makePageNumberArray = (startPage: number, endPage: number) => {
     return Array.from(

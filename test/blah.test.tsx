@@ -14,26 +14,34 @@ describe('it', () => {
       <Paginate
         currentPage={4}
         total={10}
-        containerComponent={({ children }) => (
-          <div style={{ display: 'flex', justifyContent: 'start', gap: '4px' }}>
-            {children}
-          </div>
-        )}
-        pageButtonComponent={({ children, active, ...props }) => (
-          <div
-            {...props}
-            style={{
-              backgroundColor: active ? 'blue' : 'white',
-              color: active ? 'white' : 'black',
-              cursor: 'pointer',
-              padding: '10px',
-              border: '1px solid black',
-              borderRadius: '5px',
-            }}
-          >
-            {children}
-          </div>
-        )}
+        options={{
+          containerComponent: ({ children }) => {
+            return (
+              <div
+                style={{ display: 'flex', justifyContent: 'start', gap: '4px' }}
+              >
+                {children}
+              </div>
+            );
+          },
+          pageButtonComponent: ({ children, active, ...props }) => {
+            return (
+              <div
+                {...props}
+                style={{
+                  backgroundColor: active ? 'blue' : 'white',
+                  color: active ? 'white' : 'black',
+                  cursor: 'pointer',
+                  padding: '10px',
+                  border: '1px solid black',
+                  borderRadius: '5px',
+                }}
+              >
+                {children}
+              </div>
+            );
+          },
+        }}
       />
     );
 
