@@ -1,6 +1,22 @@
 import React from 'react';
+import Container from './components/Container';
+import PageButton from './components/PageButton';
+import {
+  DEFAULT_CURRENT_PAGE,
+  DEFAULT_PAGE_SIZE as DEFAULT_PER_PAGE,
+} from './constants';
 
-const DEFAULT_PAGE_SIZE = 5;
+type PaginateProps = {
+  currentPage?: number;
+  total: number;
+  perPage?: number;
+  onClickPage?: (page: number) => void;
+  options?: Options;
+};
+
+type ContainerComponentType = React.FC<
+  React.HTMLAttributes<HTMLDivElement> & { children: React.ReactNode }
+>;
 
 type PageButtonComponentType = React.FC<
   React.HTMLAttributes<HTMLDivElement> & {
@@ -9,58 +25,49 @@ type PageButtonComponentType = React.FC<
   }
 >;
 
-const Container = ({ children }: { children: React.ReactNode }) => {
-  return <div style={{ display: 'flex', gap: 6 }}>{children}</div>;
-};
-
-const PageButtonComponent: PageButtonComponentType = ({
-  children,
-  onClick,
-  active,
-  disabled,
-  ...rest
-}) => {
-  return (
-    <div
-      onClick={e => {
-        if (disabled || active) return;
-        onClick && onClick(e);
-      }}
-      {...rest}
-      style={{
-        padding: '4px 8px',
-        background: active ? '#123456' : '',
-        color: active ? 'white' : '',
-        cursor: disabled ? 'not-allowed' : 'pointer',
-      }}
-    >
-      {children}
-    </div>
-  );
-};
-
-const components = {
-  pageButtonComponent: PageButtonComponent,
-  container: Container,
-};
-
-type PaginateProps = {
-  page?: number;
-  totalPages: number;
-  pageSize?: number;
-  onChange?: (page: number) => void;
-  containerComponent?: React.FC<{ children: React.ReactNode }>;
+type Options = {
+  containerComponent?: ContainerComponentType;
   pageButtonComponent?: PageButtonComponentType;
+  previousText?: string;
+  nextText?: string;
+  firstText?: string;
+  lastText?: string;
+};
+
+type DefaultOptions = {
+  containerComponent: ContainerComponentType;
+  pageButtonComponent: PageButtonComponentType;
+  previousText: string;
+  nextText: string;
+  firstText: string;
+  lastText: string;
+};
+
+export const defaultOptions: DefaultOptions = {
+  containerComponent: Container,
+  pageButtonComponent: PageButton,
+  nextText: 'Next',
+  previousText: 'Previous',
+  firstText: 'First',
+  lastText: 'Last',
 };
 
 export const Paginate = ({
-  page = 1,
-  totalPages,
-  pageSize = DEFAULT_PAGE_SIZE,
-  onChange,
-  containerComponent = components.container,
-  pageButtonComponent = components.pageButtonComponent,
+  total,
+  currentPage = DEFAULT_CURRENT_PAGE,
+  perPage = DEFAULT_PER_PAGE,
+  onClickPage,
+  options: initialOptions = {},
 }: PaginateProps) => {
+  const {
+    containerComponent,
+    pageButtonComponent,
+    firstText,
+    lastText,
+    nextText,
+    previousText,
+  } = { ...defaultOptions, ...initialOptions } as DefaultOptions;
+
   const Container = containerComponent;
   const PageButtonComponent = pageButtonComponent;
 
@@ -93,42 +100,45 @@ export const Paginate = ({
   };
 
   const { startPage, endPage } = calculatePageOffsets(
-    page,
-    pageSize,
-    totalPages
+    currentPage,
+    perPage,
+    total
   );
 
   return (
     <Container>
-      <PageButtonComponent disabled={page === 1} onClick={() => onChange?.(1)}>
-        First
+      <PageButtonComponent
+        disabled={currentPage === 1}
+        onClick={() => onClickPage?.(1)}
+      >
+        {firstText}
       </PageButtonComponent>
       <PageButtonComponent
-        disabled={page === 1}
-        onClick={() => onChange?.(page - 1)}
+        disabled={currentPage === 1}
+        onClick={() => onClickPage?.(currentPage - 1)}
       >
-        Previous
+        {previousText}
       </PageButtonComponent>
       {makePageNumberArray(startPage, endPage).map(pageNumber => (
         <PageButtonComponent
           key={pageNumber}
-          onClick={() => onChange?.(pageNumber)}
-          active={page === pageNumber}
+          onClick={() => onClickPage?.(pageNumber)}
+          active={currentPage === pageNumber}
         >
           {pageNumber}
         </PageButtonComponent>
       ))}
       <PageButtonComponent
-        disabled={page === totalPages}
-        onClick={() => onChange?.(page + 1)}
+        disabled={currentPage === total}
+        onClick={() => onClickPage?.(currentPage + 1)}
       >
-        Next
+        {nextText}
       </PageButtonComponent>
       <PageButtonComponent
-        disabled={page === totalPages}
-        onClick={() => onChange?.(totalPages)}
+        disabled={currentPage === total}
+        onClick={() => onClickPage?.(total)}
       >
-        Last
+        {lastText}
       </PageButtonComponent>
     </Container>
   );
