@@ -7,19 +7,31 @@ import {
 } from './constants';
 import { calculatePageOffsets } from './utils';
 
-const defaultComponents = {
+export const defaultOptions: DefaultOptions = {
+  containerComponent: Container,
   pageButtonComponent: PageButton,
-  container: Container,
+  nextText: 'Next',
+  previousText: 'Previous',
+  firstText: 'First',
+  lastText: 'Last',
 };
 
 export const Paginate = ({
-  currentPage: page = DEFAULT_CURRENT_PAGE,
-  total: totalPages,
-  perPage: pageSize = DEFAULT_PER_PAGE,
-  onClickPage: onChange,
-  containerComponent = defaultComponents.container,
-  pageButtonComponent = defaultComponents.pageButtonComponent,
+  total,
+  currentPage = DEFAULT_CURRENT_PAGE,
+  perPage = DEFAULT_PER_PAGE,
+  onClickPage,
+  options: initialOptions = {},
 }: PaginateProps) => {
+  const {
+    containerComponent,
+    pageButtonComponent,
+    firstText,
+    lastText,
+    nextText,
+    previousText,
+  } = { ...defaultOptions, ...initialOptions } as DefaultOptions;
+
   const Container = containerComponent;
   const PageButtonComponent = pageButtonComponent;
 
@@ -31,42 +43,45 @@ export const Paginate = ({
   };
 
   const { startPage, endPage } = calculatePageOffsets(
-    page,
-    pageSize,
-    totalPages
+    currentPage,
+    perPage,
+    total
   );
 
   return (
     <Container>
-      <PageButtonComponent disabled={page === 1} onClick={() => onChange?.(1)}>
-        First
+      <PageButtonComponent
+        disabled={currentPage === 1}
+        onClick={() => onClickPage?.(1)}
+      >
+        {firstText}
       </PageButtonComponent>
       <PageButtonComponent
-        disabled={page === 1}
-        onClick={() => onChange?.(page - 1)}
+        disabled={currentPage === 1}
+        onClick={() => onClickPage?.(currentPage - 1)}
       >
-        Previous
+        {previousText}
       </PageButtonComponent>
       {makePageNumberArray(startPage, endPage).map(pageNumber => (
         <PageButtonComponent
           key={pageNumber}
-          onClick={() => onChange?.(pageNumber)}
-          active={page === pageNumber}
+          onClick={() => onClickPage?.(pageNumber)}
+          active={currentPage === pageNumber}
         >
           {pageNumber}
         </PageButtonComponent>
       ))}
       <PageButtonComponent
-        disabled={page === totalPages}
-        onClick={() => onChange?.(page + 1)}
+        disabled={currentPage === total}
+        onClick={() => onClickPage?.(currentPage + 1)}
       >
-        Next
+        {nextText}
       </PageButtonComponent>
       <PageButtonComponent
-        disabled={page === totalPages}
-        onClick={() => onChange?.(totalPages)}
+        disabled={currentPage === total}
+        onClick={() => onClickPage?.(total)}
       >
-        Last
+        {lastText}
       </PageButtonComponent>
     </Container>
   );

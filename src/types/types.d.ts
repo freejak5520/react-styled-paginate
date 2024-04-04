@@ -3,9 +3,12 @@ type PaginateProps = {
   total: number;
   perPage?: number;
   onClickPage?: (page: number) => void;
-  containerComponent?: React.FC<{ children: React.ReactNode }>;
-  pageButtonComponent?: PageButtonComponentType;
+  options?: Options;
 };
+
+type ContainerComponentType = React.FC<
+  React.HTMLAttributes<HTMLDivElement> & { children: React.ReactNode }
+>;
 
 type PageButtonComponentType = React.FC<
   React.HTMLAttributes<HTMLDivElement> & {
@@ -13,3 +16,21 @@ type PageButtonComponentType = React.FC<
     disabled?: boolean;
   }
 >;
+
+type Options = {
+  containerComponent?: ContainerComponentType;
+  pageButtonComponent?: PageButtonComponentType;
+  previousText?: string;
+  nextText?: string;
+  firstText?: string;
+  lastText?: string;
+};
+
+type DefaultOptions = {
+  containerComponent: ContainerComponentType;
+  pageButtonComponent: PageButtonComponentType;
+  previousText: string;
+  nextText: string;
+  firstText: string;
+  lastText: string;
+};
