@@ -1,0 +1,454 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders with custom component 1`] = `
+<div
+  style={
+    Object {
+      "display": "flex",
+      "gap": 6,
+    }
+  }
+>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "not-allowed",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    First
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "not-allowed",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    Previous
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "#123456",
+        "color": "white",
+        "cursor": "pointer",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    1
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "pointer",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    2
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "pointer",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    3
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "pointer",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    4
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "pointer",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    5
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "pointer",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    6
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "pointer",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    7
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "pointer",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    8
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "pointer",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    9
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "pointer",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    10
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "pointer",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    11
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "pointer",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    12
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "pointer",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    13
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "pointer",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    14
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "pointer",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    15
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "pointer",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    16
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "pointer",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    17
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "pointer",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    18
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "pointer",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    19
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "pointer",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    20
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "pointer",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    Next
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "pointer",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    Last
+  </div>
+</div>
+`;
+
+exports[`it renders without crashing 1`] = `
+<div
+  style={
+    Object {
+      "display": "flex",
+      "gap": 6,
+    }
+  }
+>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "not-allowed",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    First
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "not-allowed",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    Previous
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "#123456",
+        "color": "white",
+        "cursor": "pointer",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    1
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "pointer",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    2
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "pointer",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    3
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "pointer",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    4
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "pointer",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    5
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "pointer",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    Next
+  </div>
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "background": "",
+        "color": "",
+        "cursor": "pointer",
+        "padding": "4px 8px",
+      }
+    }
+  >
+    Last
+  </div>
+</div>
+`;

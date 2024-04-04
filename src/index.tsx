@@ -39,7 +39,7 @@ const PageButtonComponent: PageButtonComponentType = ({
   );
 };
 
-export const components = {
+const components = {
   pageButtonComponent: PageButtonComponent,
   container: Container,
 };

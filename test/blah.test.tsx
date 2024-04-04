@@ -1,11 +1,19 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import renderer from 'react-test-renderer';
 import { Paginate } from '../src';
 
 describe('it', () => {
   it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<Paginate totalPages={10} />, div);
-    ReactDOM.unmountComponentAtNode(div);
+    const component = renderer.create(<Paginate totalPages={100} />);
+
+    expect(component.toJSON()).toMatchSnapshot();
+  });
+
+  it('renders with custom component', () => {
+    const component = renderer.create(
+      <Paginate totalPages={100} pageSize={20} />
+    );
+
+    expect(component.toJSON()).toMatchSnapshot();
   });
 });
